@@ -1,6 +1,6 @@
 # CREATE SPARK CONTEXT
 from pyspark import SparkConf, SparkContext, SQLContext
-conf = SparkConf().setMaster('local').setAppName('Ch6_Advanced_Spark_Prog.py')
+conf = SparkConf().setMaster('local[*]').setAppName('Ch6_Advanced_Spark_Prog.py')
 sc = SparkContext(conf= conf)
 from operator import add
 
@@ -78,9 +78,8 @@ The statistics are all computed with a single pass over the data and returned as
 '''
 List_values = [x for x in range(0,10)]
 RDD_range_values = sc.parallelize(List_values)
-'''
+
 print('#######', 'Mean', RDD_range_values.mean())
 print('#######', 'Sum', RDD_range_values.sum())
 print('#######', 'STDEV', round(RDD_range_values.stdev(), 2))
 print('#######', 'STATS', RDD_range_values.stats())
-'''
