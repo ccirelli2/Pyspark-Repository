@@ -55,20 +55,20 @@ Split_data = Ratings_data.flatMap(lambda x: x.split('\n')).map(lambda x: x.split
 Group_by_key = Split_data.groupByKey()
 
 
-
 # GET AVERAGE LENGTH REVIEW
 
 def Get_average(KeyValue):
 	return KeyValue[0], round(sum(list(KeyValue[1])) / len(list(KeyValue[1])),2)
 
-Average_length = Group_by_key.map(Get_average)
+Average_length = Group_by_key.map(Get_average).sortByKey()
 
+Result = Average_length.collect()
 
-print('#######', Average_length.collect())
+def PrintResult(Result):
+	for result in Result:
+		print(Result[0], 'star rating', Result[1])
 
-
-
-
+PrintResult(Result)
 
 
 
