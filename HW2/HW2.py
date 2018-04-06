@@ -31,7 +31,7 @@ Ratings_data = sc.textFile('/home/ccirelli2/Desktop/Scalable_Analytics/HW2/Amazo
 	2.) Return:  (Review, length text)
 '''
 
-def Transform(Lists):
+def CreateKeyValuePair(Lists):
 	punct = string.punctuation
 	return Lists[6], len(list(filter(lambda x: x not in punct, Lists[5].split(' ')))) 
 
@@ -42,9 +42,30 @@ def Transform(Lists):
 		b.) Split each line on '^'
 		c.) Map our top-level function to this RDD
 '''
-Split_data = Ratings_data.flatMap(lambda x: x.split('\n')).map(lambda x: x.split('^')).map(Transform)
+Split_data = Ratings_data.flatMap(lambda x: x.split('\n')).map(lambda x: x.split('^')).map(CreateKeyValuePair)
 
 print('#######', Split_data.take(2))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
