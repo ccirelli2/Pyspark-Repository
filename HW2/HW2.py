@@ -14,30 +14,37 @@ conf = SparkConf().setMaster('local').setAppName('HW2.py')
 sc = SparkContext(conf = conf)
 
 
-# Create RDD
+# Import Python Functions
+import string
 
+# Create RDD
+'''Import CSV file as a Text RDD'''
 Ratings_data = sc.textFile('/home/ccirelli2/Desktop/Scalable_Analytics/HW2/Amazon_Comments.csv')
 
-# Split Data:
-'''retruns a list of lists in which each list constitutes a review and value within the list 0-6 are the entries'''
-#Split_data = Ratings_data.flatMap(lambda x: x.split('\n')).map(lambda x: x.split('^')).collect()
-
-
-# Tokenize Review Text
-'''Text is in position 5'''
+# Transformation Function
+'''Documentation:
+	1.) Create a top-level function called 'Transform' to 
+		a.) Limit the return value to index 5 (text of review) and index 6 (rating)
+		b.) Split the review text on spaces and thereby tokenizing it. 
+		c.) Filter out any punctuation from the tokenized review text 
+		d.) take the length of the list of tokenized text 
+	2.) Return:  (Review, length text)
+'''
 
 def Transform(Lists):
-	return len(Lists[5].split(' ')[0].translate(None, string.punctuation)), Lists[6]
+	punct = string.punctuation
+	return Lists[6], len(list(filter(lambda x: x not in punct, Lists[5].split(' ')))) 
 
-
+# Transform RDD
+'''Documentation
+	1.) Execute a series of RDD transformation functions to
+		a.) Split text on each line
+		b.) Split each line on '^'
+		c.) Map our top-level function to this RDD
+'''
 Split_data = Ratings_data.flatMap(lambda x: x.split('\n')).map(lambda x: x.split('^')).map(Transform)
 
-#Test = map(Transform, Split_data)
-
-
-
-print('#######', Split_data.take(1))
-
+print('#######', Split_data.take(2))
 
 
 

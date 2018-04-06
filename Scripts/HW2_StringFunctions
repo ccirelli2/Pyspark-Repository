@@ -1,0 +1,8 @@
+
+
+
+import string
+
+String = 'Today;is a,good day to code!'
+
+from string import translate
