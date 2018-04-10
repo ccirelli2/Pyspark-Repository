@@ -64,11 +64,12 @@ Average_length = Group_by_key.map(Get_average).sortByKey()
 
 Result = Average_length.collect()
 
-def PrintResult(Result):
-	for result in Result:
-		print(Result[0], 'star rating', Result[1])
+print('{} starr rating: average length of comments'.format(Result[0][0][0]), Result[0][1])
+print('{} starr rating: average length of comments'.format(Result[1][0][0]), Result[1][1])
+print('{} starr rating: average length of comments'.format(Result[2][0][0]), Result[2][1])
+print('{} starr rating: average length of comments'.format(Result[3][0][0]), Result[3][1])
+print('{} starr rating: average length of comments'.format(Result[4][0][0]), Result[4][1])
 
-PrintResult(Result)
 
 
 

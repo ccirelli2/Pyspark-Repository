@@ -1,0 +1,27 @@
+# NOTES ON SPARK CONF AND CONTEXT
+
+
+PUBLIC CLASSES:
+
+1.) Spark Context:
+	-pyspark.SparkContext(master=None, appName=None, sparkHome=None, pyFiles=None, 
+	environment=None, batchSize=0, serializer=PickleSerializer(), conf=None, 
+	gateway=None, jsc=None, profiler_cls=<class 'pyspark.profiler.BasicProfiler'>)	
+	- Main entry point for Spark Fuctionality.
+	- Q: What does this mean?
+	- A spark context represents the connectionto a Spark cluster, and can be used
+	to create RDD and broadcast variables on a cluster.
+	- addFile(path):  add a file to be downloaded with this spark job at every
+	node.  
+
+2.) SparkConf:
+	- pyspark.SparkConf(loadDefaults = True, _jvm = None, _jconf = None)
+	- For configuring SPark. 
+	- ex: setMaster(value)
+	- ex: 
+
+
+
+
+
+
