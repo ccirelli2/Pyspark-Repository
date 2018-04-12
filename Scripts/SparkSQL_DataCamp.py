@@ -96,6 +96,8 @@ print('@@@@@@@@@@@',CSV_df2.show(10))
 		WHERE (end) conditional statement.  
 2.) Print Col	print(df.columns) will print the column names. Use as reference. 
 
+3.) GroupBy	Breaks data into groups
+
 '''
 
 # Print Column names
@@ -104,16 +106,19 @@ print('@@@@@@@@@', CSV_dataframe.columns)
 '''
 
 # Query a table using the column names
-
+''' Not working
 query1 = 'SELECT cartodb_id, FROM CSV_dataframe';
-
 Test = my_spark.sql(query1)
-
 print(Test.show())
+'''
+
+# GroupBy Operation
+'''
+Group_statement = 'SELECT COUNT(*) FROM CSV_dataframe GROUP BY cartodb_id'
+'''
 
 
-
-
+# PART III:  FILTERING DATA USING RDD OPERATIONS
 
 
 
