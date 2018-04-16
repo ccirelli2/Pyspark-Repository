@@ -88,34 +88,12 @@ Time_Groups_RDD = PU_DO_Times_RDD.map(Transform_RDD_Duration_groups)
 
 One_Passenger_TimeGroup_Cost = Time_Groups_RDD.filter(lambda x: x[0] == 1).map(lambda x: (x[1],x[2]))
 
+One_Passenger_AverageCost_ByTripDuration = One_Passenger_TimeGroup_Cost.mapValues(lambda x: (x,1))\
+																	   .reduceByKey(lambda x,y: (x[0] + y[0], x[1] + y[1]))
 
-print('#####', One_Passenger_TimeGroup_Cost.take(10))
-
-
-
-
+print('@@@@@@@@@@', One_Passenger_AverageCost_ByTripDuration.take(1))
 
 
-
-# # QUESTION 1:  WHAT IS THE FREQUENCY OF TRIPS BY HOUR?
-# #NumTripsByHour_RDD = PU_DO_NumPass_RDD.map(lambda x: (x[0][10:13],1)).reduceByKey(lambda x,y: x+y)
-# #print('########', NumTripsByHour_RDD.sortByKey(ascending = False).collect())
-#
-#
-# # QUESTION 2: DOES THE NUMBER OF PASSENGERS CHANGE THROUGHOUT THE DAY?
-# '''Documentation:
-# (x,())   => The count of the key (hour, number of passengers)
-# (,(x,y)  => Hour, number of persons.
-# '''
-# PU_DO_Times = PU_DO_NumPass_RDD.map(lambda x: ((x[0][10:13], x[2]), 1))\
-# .reduceByKey(lambda x,y: x+y)\
-# .map(lambda x: (x[1], x[0])).sortByKey(ascending = False)\
-# .map(lambda x: (x[0], x[1][0], x[1][1]))\
-# .coalesce(1).collect()
-# #.coalesce(1).saveAsTextFile('/home/ccirelli2/Desktop/Scalable_Analytics/Final_Project/Trips_Hour_NumPass')
-# #print('########', PU_DO_Times)
-#
-# df = pd.DataFrame(PU_DO_Times)
 
 def write_to_excel(dataframe, location, filename):
     os.chdir(location)
